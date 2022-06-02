@@ -1,0 +1,46 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
+.example-container {
+  height: calc(100vh - 65px);
+}
+
+.example-sidenav-content {
+  margin: 16px;
+  margin-left: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+  width: 300px;
+  margin: 15px;
+  background-color: dodgerblue;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: flex-start;
+  font-size: 16px;
+}
+
+list-icon {
+  margin-right: 20px;
+  padding-right: 30px;
+}
+
+.active-list-item {
+  background-color: #4da6ff;
+  border-left: 5px solid;
+}

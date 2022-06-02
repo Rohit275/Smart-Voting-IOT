@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { OtpVerifyComponent } from '../otp-verify/otp-verify.component';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,7 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +24,14 @@ export class SignupComponent implements OnInit {
     if(form.valid && form.value.password == form.value.confirmPassword) {
       this.authService.register(form.value);
     }
+
+
+  }
+
+  verifyOTP() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    this.dialog.open(OtpVerifyComponent, dialogConfig);
   }
 
 }

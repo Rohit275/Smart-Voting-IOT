@@ -1,0 +1,40 @@
+<!-- <div class="container">
+  <div class="info-text">
+    <h2>Please enter the OTP sent to your email</h2>
+  </div>
+
+  <div class="form-wrapper">
+    <form>
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Enter your 4 digit otp" aria-label="OTP" aria-describedby="basic-addon2">
+      </div>
+      <button type="button" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div> -->
+
+
+<div class="container height-100 d-flex justify-content-center align-items-center">
+  <div class="position-relative">
+    <div class="text-center">
+      <h2>Please enter the OTP sent to your email</h2>
+      <form #f="ngForm" (ngSubmit)="f.valid && onVerifyOTP(f)">
+
+        <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+          <input
+            class="m-3 text-center form-control rounded"
+            type="text"
+            id="first"
+            maxlength="4"
+            name="verifyOtp"
+            required
+            ngModel />
+        </div>
+        <div class="mt-4">
+          <button class="btn btn-primary px-4 validate" type="submit">Validate</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

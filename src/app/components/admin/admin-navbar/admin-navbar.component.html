@@ -1,0 +1,55 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span></span>
+  <span class="example-spacer"></span>
+
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    routerLink="../"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #sidenav class="example-sidenav mat-elevation-z8" mode="side">
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="../admin/dashboard"
+      routerLinkActive="active-list-item"
+    >
+      <mat-icon class="list-icon">dashboard</mat-icon> &nbsp; Dashboard
+    </button>
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="/election"
+      routerLinkActive="active-list-item"
+    >
+      <mat-icon class="list-icon">list</mat-icon> &nbsp; Election
+    </button>
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="../admin/sensor"
+      routerLinkActive="active-list-item"
+    >
+      <mat-icon class="list-icon">sensors</mat-icon>
+      &nbsp; Sensors
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

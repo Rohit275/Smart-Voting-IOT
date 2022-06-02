@@ -1,0 +1,15 @@
+<div class="container">
+  <div *ngFor="let item of sensors" class="content">
+    <h3>{{ item.Name }}</h3>
+    <div style="cursor: pointer" (click)="onClickDiv(item._id, item.Status)">
+      <h2
+        [ngClass]="{
+          'sts-on': item.Status == 'On',
+          'sts-off': item.Status == 'Off'
+        }"
+      >
+        {{ item.Status }}
+      </h2>
+    </div>
+  </div>
+</div>

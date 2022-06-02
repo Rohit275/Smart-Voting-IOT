@@ -1,0 +1,48 @@
+<div class="box-container">
+  <div class="box-content">
+    <h3>Active Sensors</h3>
+    <h2>{{ activeSensor }}</h2>
+  </div>
+  <div class="box-content">
+    <h3>Total contestants</h3>
+    <h2>5</h2>
+  </div>
+  <div class="box-content">
+    <h3>Total Votes</h3>
+    <circle-progress
+      [percent]="70"
+      [backgroundOpacity]="1"
+      [radius]="65"
+      [space]="-10"
+      [outerStrokeGradient]="true"
+      [outerStrokeWidth]="14"
+      [showSubtitle]="true"
+      [outerStrokeColor]="'#4882c2'"
+      [outerStrokeGradientStopColor]="'#53a9ff'"
+      [innerStrokeColor]="'#e7e8ea'"
+      [title]="'70'"
+    ></circle-progress>
+  </div>
+</div>
+<hr />
+
+<div class="box-container">
+  <div class="sec-content">
+    <h3>Leading Contestant</h3>
+    <h2>{{ leadingContestant.name }}</h2>
+    <p>{{ leadingContestant.id }}</p>
+  </div>
+
+  <div class="sec-content-2">
+    <h3>List Of Contestants</h3>
+    <ul class="list-group">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let item of contestantlist"
+      >
+        {{ item.name }}
+        <span style="color: tomato; font-weight: bolder">{{ item.votes }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

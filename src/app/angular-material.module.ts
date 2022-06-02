@@ -14,7 +14,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   exports: [
@@ -32,7 +33,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTooltipModule,
     MatSidenavModule,
     MatTreeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
   ],
 })
 export class AngularMaterialModule {}
