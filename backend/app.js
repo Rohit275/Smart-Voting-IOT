@@ -11,9 +11,7 @@ app.use(cors());
 
 const conn = mongoose
   .connect(
-    "mongodb+srv://admin:" +
-      process.env.MONGODB_ATLAS_PWD +
-      "@voting-system.ijzf4re.mongodb.net/Voting?retryWrites=true&w=majority"
+    "mongodb+srv://admin:Qwerty%40123@voting-system.ijzf4re.mongodb.net/Voting?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to Mongo DB...", err));
