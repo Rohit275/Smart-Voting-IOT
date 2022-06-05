@@ -19,6 +19,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout.component';
+import { AdminElectionComponent } from './components/admin/admin-election/admin-election.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UserLayoutComponent } from './layouts/user-layout.component';
     LoginLayoutComponent,
     AdminLayoutComponent,
     UserLayoutComponent,
+    AdminElectionComponent,
   ],
   imports: [
     BrowserModule,

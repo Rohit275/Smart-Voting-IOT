@@ -1,18 +1,48 @@
 <body>
   <div class="container1">
-    <form #f="ngForm" (ngSubmit)="f.valid && onLogin(f)">
+    <form *ngIf="!isAdmin" #f="ngForm" (ngSubmit)="f.valid && onLogin(f)">
       <h1>Login</h1>
       <mat-form-field class="full-width-input">
         <input
           matInput
-          placeholder="User Name"
+          placeholder="Mail ID"
           name="userName"
           ngModel
           required
-          [disabled]="isAdmin"
         />
         <mat-error> Please provide a valid user name </mat-error>
       </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="OTP"
+          name="password"
+          [type]="hide ? 'password' : 'text'"
+          maxlength="4"
+          ngModel
+          required
+          [disabled]="!isSubmit"
+        />
+        <mat-icon
+          style="cursor: pointer; color: #ffffff"
+          matSuffix
+          (click)="hide = !hide"
+          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+        >
+        <mat-error> Please provide a valid password </mat-error>
+      </mat-form-field>
+      <p (click)="userClick()">Login as {{ currentShift }}</p>
+
+      <button mat-raised-button *ngIf="!isSubmit" (click)="onNext(f)">
+        Next
+      </button>
+      <button mat-raised-button type="submit" *ngIf="isSubmit">Login</button>
+    </form>
+
+    <form *ngIf="isAdmin" #f="ngForm" (ngSubmit)="f.valid && onLogin(f)">
+      <h1>Login</h1>
 
       <mat-form-field class="full-width-input">
         <input

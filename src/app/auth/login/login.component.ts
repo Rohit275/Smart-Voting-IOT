@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   currentShift = 'admin';
   isAdmin: boolean = false;
+  isSubmit: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     if (this.isAdmin) {
       this.isAdmin = false;
       this.currentShift = 'admin';
+      this.isSubmit = false;
     } else {
       this.isAdmin = true;
       this.currentShift = 'user';
@@ -35,9 +37,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  onNext(form: NgForm) {
+    this.isSubmit = true;
+    console.log('On next');
+    this.authService.sendOTP(form.value.userName);
+  }
+
   onLogin(form: NgForm) {
-    console.log(form.value);
     if (this.isAdmin) {
+      console.log(form.value);
       console.log('Admin');
       if (form.value.password == 'admin') {
         this.router.navigate(['/admin/dashboard']);
@@ -45,6 +53,8 @@ export class LoginComponent implements OnInit {
         console.log('Incorrect password!');
       }
     } else {
+      console.log('On Login');
+      console.log(form.value);
       this.authService.loginUser(form.value.userName, form.value.password);
 
       console.log('normal');

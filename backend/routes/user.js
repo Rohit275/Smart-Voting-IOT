@@ -9,6 +9,13 @@ const UserOTPVerification = require("../models/userOtpVerfication");
 
 const router = express.Router();
 
+const mongoose = require("mongoose");
+
+const userSchema = mongoose.Schema({});
+const Election= require("../models/election")
+// module.exports = mongoose.model("User", userSchema);
+
+
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -28,21 +35,90 @@ transporter.verify((error, success) => {
   }
 })
 
-router.post("/login", (req, res, next) => {
+router.get("/getElection", (req, res, next) => {
+  Election.find().then((documents) => {
+    console.log(documents);
+    res.status(200).json({
+      message: "Sensor Details Fetched succesfully",
+      category: documents,
+    });
+  });
+});
+
+router.post("/login", async (req, res, next) => {
  console.log("In login func",req.body)
-  Users.findOne({
-    Username: req.body.username,
+//  Users.find().then((user) => {
+//    console.log(user)
+//  })
+  await Users.findOne({
+    Name: req.body.username,
     Password: req.body.password,
   }).then((user) => {
     if (user) {
-      console.log("USer found")
+      console.log("User found")
       return res.status(200).json({ message: "Login Success", user: user });
     } else {
-      console.log("USer Not found")
+      console.log("User Not found")
       return res.status(404).json({ message: "User not found" });
     }
   });
 });
+
+router.post("/sendOTP", async (req, res, next) => {
+  console.log("In sendOTP function", req.body);
+
+  Users.find({
+    Email: req.body.username
+  }).then((user) => {
+    if(user) {
+      sendOtpVerification(user, res).then((val) => {
+        console.log(val);
+        return res.status(200).json(val);
+      })
+    } else {
+      console.log('User not found');
+      return res.status(404).json({message: 'User not found'})
+    }
+  })
+})
+
+const sendOtpVerification = async (result, res) => {
+  try {
+
+    const Email = result[0].Email;
+    const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const mailOption = {
+      from: 'otptestingiot@gmail.com',
+      to: Email,
+      subject: "Verify Your Email",
+      html: `<p>Enter <b>${otp}</b> in the app to verify your account</p><br><p>This code expires in <b>1 hour</b></p>`
+    };
+
+    // const newOTPVerification = await new UserOTPVerification({
+    //   userId: _id,
+    //   otp: otp,
+    //   createdAt: Date.now(),
+    //   expiresAt: Date.now() + 3600000,
+    // })
+
+    await transporter.sendMail(mailOption);
+    console.log('Mail sent successfully!');
+    // await newOTPVerification.save().then((result)=> {
+    //   res.json({user: result, message: "Verification mail sent"});
+    // });
+
+    // res.json({message: "Verification mail sent"})
+
+    return { message: "Success", otp, result };
+
+  } catch (error) {
+    return {message: "Operation failed!"}
+    res.json({message: error.message})
+  }
+}
+
+
 
 router.post('/register', (req, res) => {
   let user = req.body;
@@ -92,35 +168,6 @@ router.post('/register', (req, res) => {
 
 })
 
-const sendOtpVerification = async ({ _id, Email }, res) => {
-  // try {
-  //   const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
-
-  //   const mailOption = {
-  //     from: 'otptestingiot@gmail.com',
-  //     to: Email,
-  //     subject: "Verify Your Email",
-  //     html: `<p>Enter <b>${otp}</b> in the app to verify your account</p><br><p>This code expires in <b>1 hour</b></p>`
-  //   };
-
-  //   const newOTPVerification = await new UserOTPVerification({
-  //     userId: _id,
-  //     otp: otp,
-  //     createdAt: Date.now(),
-  //     expiresAt: Date.now() + 3600000,
-  //   })
-
-  //   await transporter.sendMail(mailOption);
-  //   await newOTPVerification.save().then((result)=> {
-  //     res.json({user: result, message: "Verification mail sent"});
-  //   });
-
-  //   // res.json({message: "Verification mail sent"})
-
-  // } catch (error) {
-  //   res.json({message: error.message})
-  // }
-}
 
 router.post("/verifyOTP", async (req, res) => {
   try {

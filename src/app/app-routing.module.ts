@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { AdminElectionComponent } from './components/admin/admin-election/admin-election.component';
 import { AdminSensorComponent } from './components/admin/admin-sensor/admin-sensor.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'sensor', component: AdminSensorComponent },
+      { path: 'election', component: AdminElectionComponent },
     ],
   },
   {
